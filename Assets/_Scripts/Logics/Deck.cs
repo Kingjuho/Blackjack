@@ -7,6 +7,9 @@ public class Deck
     // 덱
     private Stack<Card> _cards = new Stack<Card>();
 
+    // 랜덤 함수
+    private static Random _random = new Random();
+
     // 덱 생성
     public void Initialize()
     {
@@ -26,7 +29,8 @@ public class Deck
         // 셔플을 위해 리스트로 변환
         List<Card> cardList = _cards.ToList();
 
-        // TODO: 피셔 예이츠 셔플 알고리즘 사용
+        // 피셔 예이츠 셔플 알고리즘 사용
+        FisherYates(ref cardList);
 
         // 리스트를 다시 스택으로 변환하여 원본과 교체
         _cards = new Stack<Card>(cardList);
@@ -36,5 +40,23 @@ public class Deck
     public Card DrawCard()
     {
         return _cards.Count > 0 ? _cards.Pop() : null;
+    }
+
+    private void FisherYates(ref List<Card> cards)
+    {
+        int n = 52; // 절대 변하지 않는 매직 넘버
+
+        while (n > 1)
+        {
+            n--;
+
+            // 0부터 n 사이의 무작위 인덱스 선택
+            int k = _random.Next(n + 1);
+
+            // 스왑
+            Card temp = cards[k];
+            cards[k] = cards[n];
+            cards[n] = temp;
+        }
     }
 }
