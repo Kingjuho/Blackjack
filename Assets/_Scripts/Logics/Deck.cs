@@ -13,6 +13,9 @@ public class Deck
     // 덱 생성
     public void Initialize()
     {
+        // 생성 전 스택 청소
+        _cards.Clear();
+
         // enum을 foreach문으로 사용하여 총 52장 생성
         foreach (Suit suit in Enum.GetValues(typeof(Suit)))
         {
@@ -30,7 +33,7 @@ public class Deck
         List<Card> cardList = _cards.ToList();
 
         // 피셔 예이츠 셔플 알고리즘 사용
-        FisherYates(ref cardList);
+        FisherYates(cardList);
 
         // 리스트를 다시 스택으로 변환하여 원본과 교체
         _cards = new Stack<Card>(cardList);
@@ -42,9 +45,10 @@ public class Deck
         return _cards.Count > 0 ? _cards.Pop() : null;
     }
 
-    private void FisherYates(ref List<Card> cards)
+    private void FisherYates(List<Card> cards)
     {
-        int n = 52; // 절대 변하지 않는 매직 넘버
+        // 덱 개수
+        int n = cards.Count;
 
         while (n > 1)
         {
@@ -54,9 +58,7 @@ public class Deck
             int k = _random.Next(n + 1);
 
             // 스왑
-            Card temp = cards[k];
-            cards[k] = cards[n];
-            cards[n] = temp;
+            (cards[k], cards[n]) = (cards[n], cards[k]);
         }
     }
 }
