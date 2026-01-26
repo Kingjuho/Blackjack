@@ -7,6 +7,16 @@ public class Hand : MonoBehaviour
     // 패
     private List<Card> _myCards = new List<Card>();
 
+    // 카드 생성 위치
+    [Header("UI Setting")]
+    [SerializeField] Transform _cardSpawnPoint;
+
+    // 카드 생성 위치 설정
+    public void Setup(Transform spawnPoint)
+    {
+        _cardSpawnPoint = spawnPoint;
+    }
+
     // 점수 계산
     public int CalculateScore()
     {
@@ -34,7 +44,26 @@ public class Hand : MonoBehaviour
         return total;
     }
 
-    public void AddCard(Card card) { _myCards.Add(card); }
+    public void AddCard(Card card) 
+    { 
+        _myCards.Add(card);
 
-    public void ClearHand() { _myCards.Clear(); }
+        // 안전 장치
+        if (_cardSpawnPoint == null) return;
+
+        // 프리팹 생성
+        GameObject cardObj = Instantiate(GameManager.instance.CardPrefab, _cardSpawnPoint);
+
+        // 카드 데이터 주입
+        CardView view = cardObj.GetComponent<CardView>();
+        view.SetCard(card, GameManager.instance.CardAtlas);
+    }
+
+    public void ClearHand() 
+    { 
+        _myCards.Clear();
+
+        // 화면에 있는 카드 전부 삭제
+        foreach (Transform child in _cardSpawnPoint) Destroy(child.gameObject);
+    }
 }

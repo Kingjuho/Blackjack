@@ -165,8 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3223594632fe61d4c83e184d49a52fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardView
-  _frontImage: {fileID: 0}
-  _backImage: {fileID: 0}
+  _frontImage: {fileID: 4048361251919908063}
+  _backImage: {fileID: 7315075508895045812}
 --- !u!1 &8099717894678501940
 GameObject:
   m_ObjectHideFlags: 0

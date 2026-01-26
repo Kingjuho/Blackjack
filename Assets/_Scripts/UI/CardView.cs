@@ -11,7 +11,7 @@ public class CardView : MonoBehaviour
     public void SetCard(Card cardData, SpriteAtlas atlas)
     {
         // 아틀라스에서 스프라이트 가져오기
-        string spriteName = $"{cardData.Rank}_of_{cardData.Suit}".ToLower();
+        string spriteName = cardData.SpriteName;
 
         Sprite sprite = atlas.GetSprite(spriteName);
         if (sprite != null)
