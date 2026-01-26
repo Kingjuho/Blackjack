@@ -47,5 +47,15 @@ public class GameManager : MonoBehaviour
         Card pCard2 = deck.DrawCard();
         pCard2.IsFaceUp = true;
         PlayerHand.AddCard(pCard2);
+
+        DealerHand.AddCard(deck.DrawCard());
+        DealerHand.AddCard(deck.DrawCard());
+        DealerHand.AddCard(deck.DrawCard());
+        DealerHand.AddCard(deck.DrawCard());
+        DealerHand.AddCard(deck.DrawCard());
+        DealerHand.AddCard(deck.DrawCard());
+        DealerHand.AddCard(deck.DrawCard());
+        DealerHand.AddCard(deck.DrawCard());
+        DealerHand.AddCard(deck.DrawCard());
     }
 }
