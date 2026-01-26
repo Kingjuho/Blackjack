@@ -31,12 +31,21 @@ public class GameManager : MonoBehaviour
         deck.Initialize();
         deck.Shuffle();
 
-        // 딜러 2장
-        DealerHand.AddCard(deck.DrawCard());
+        // 딜러
         DealerHand.AddCard(deck.DrawCard());
 
-        // 플레이어 2장
-        PlayerHand.AddCard(deck.DrawCard());
-        PlayerHand.AddCard(deck.DrawCard());
+        // 뒤집기 확인
+        Card dealerCard2 = deck.DrawCard();
+        dealerCard2.IsFaceUp = true;
+        DealerHand.AddCard(dealerCard2);
+
+        // 플레이어
+        Card pCard1 = deck.DrawCard();
+        pCard1.IsFaceUp = true;
+        PlayerHand.AddCard(pCard1);
+
+        Card pCard2 = deck.DrawCard();
+        pCard2.IsFaceUp = true;
+        PlayerHand.AddCard(pCard2);
     }
 }
