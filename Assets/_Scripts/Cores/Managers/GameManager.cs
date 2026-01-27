@@ -122,12 +122,38 @@ public class GameManager : MonoBehaviour
     // 점수 계산
     void CalculateResult()
     {
-        int pScore = Player.CalculateScore();
-        int dScore = Dealer.CalculateScore();
+        int playerScore = Player.CalculateScore();
+        int dealerScore = Dealer.CalculateScore();
 
-        if (dScore > 21) ChangeState(new ResultState("Dealer Bust! You Win!", 0));
-        else if (pScore > dScore) ChangeState(new ResultState("You Win!", 0));
-        else if (pScore < dScore) ChangeState(new ResultState("Dealer Win...", 2));
-        else ChangeState(new ResultState("Draw", 1));
+        // 블랙잭 확인
+        bool playerBlackJack = Player.IsBlackJack;
+        bool dealerBlackJack = Dealer.IsBlackJack;
+
+        // 결과 정산
+        // 딜러 버스트(플레이어 승)
+        if (dealerScore > 21)
+        {
+            ChangeState(new ResultState("Dealer Bust! You Win!", 0, playerBlackJack));
+        }
+        // 플레이어 점수가 높음(플레이어 승)
+        else if (playerScore > dealerScore)
+        {
+            ChangeState(new ResultState("You Win!", 0, playerBlackJack));
+        }
+        // 딜러 점수가 더 높음(플레이어 패)
+        else if (playerScore < dealerScore)
+        {
+            ChangeState(new ResultState("Dealer Win...", 2));
+        }
+        // 무승부
+        else
+        {
+            // 플레이어는 블랙잭, 딜러는 일반 21
+            if (playerBlackJack && !dealerBlackJack) ChangeState(new ResultState("You Win!", 0, playerBlackJack));
+            // 플레이어는 일반 21, 딜러는 블랙잭
+            else if (!playerBlackJack && dealerBlackJack) ChangeState(new ResultState("Dealer Win...", 2));
+            // 그 외
+            else ChangeState(new ResultState("Push", 1));
+        }
     }
 }

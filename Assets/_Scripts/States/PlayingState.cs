@@ -8,7 +8,8 @@
         // 카드 분배
         gm.Initialize();
 
-        // TODO: 한 번에 블랙잭이 떴을 경우 체크?
+        // 내추럴 블랙잭 체크
+        if (gm.Player.CalculateScore() == 21) OnStand(gm);
     }
 
     public void OnBet(GameManager gm, int amount) { }

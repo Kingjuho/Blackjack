@@ -7,6 +7,9 @@ public class Hand : MonoBehaviour
     // 패
     protected List<Card> _myCards { get; } = new List<Card>();
 
+    // 블랙잭 여부
+    public bool IsBlackJack => CalculateScore() == 21 && _myCards.Count == 2;
+
     // 카드 생성 위치
     [Header("UI Setting")]
     [SerializeField] protected Transform _cardSpawnPoint;
