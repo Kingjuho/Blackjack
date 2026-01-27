@@ -31,8 +31,16 @@ public class Player : Hand
         // 블랙잭이면 1.5배
         int profit = isBlackJack ? (int)(BetAmount * 1.5) : BetAmount;
         OwnedMoney += (BetAmount + profit);
+        BetAmount = 0;
     }
 
     // 패배 정산
     public void Lose() { BetAmount = 0; }
+
+    // 무승부 정산
+    public void Draw()
+    {
+        OwnedMoney += BetAmount;
+        BetAmount = 0;
+    }
 }

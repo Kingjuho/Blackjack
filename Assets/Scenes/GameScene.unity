@@ -344,15 +344,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f572435a18b098042a9e37b2dbb4211e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  PlayerHand: {fileID: 705459020}
-  DealerHand: {fileID: 1734080529}
+  Player: {fileID: 705459020}
+  Dealer: {fileID: 1734080529}
   BGM: {fileID: 8300000, guid: a30b4808126d0334b9b09a005bcebaee, type: 3}
   CardPrefab: {fileID: 6718854384512008047, guid: 199e79189fddf964487799d2bdc89f98, type: 3}
   CardAtlas: {fileID: 100100200, guid: 48634ccc08a621a49965fd86d13f4ddf, type: 3}
-  ActionPanel: {fileID: 3984584}
-  CoinPanel: {fileID: 1950650103}
-  ResultPanel: {fileID: 2071438889}
-  ResultText: {fileID: 970596824}
 --- !u!1 &344357656
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,6 +684,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &525930682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 525930684}
+  - component: {fileID: 525930683}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &525930683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525930682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69631c180c40fb47be50e73c4dd6a83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  _coinPanel: {fileID: 1950650103}
+  _actionPanel: {fileID: 3984584}
+  _resultPanel: {fileID: 2071438889}
+  _ownedMoneyText: {fileID: 0}
+  _betAmountText: {fileID: 0}
+  _resultText: {fileID: 970596824}
+--- !u!4 &525930684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525930682}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.00314, y: -0.06622, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &594666849
 GameObject:
   m_ObjectHideFlags: 0
@@ -930,6 +976,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   _bgmSource: {fileID: 594666852}
   _sfxSource: {fileID: 594666851}
+  ChipSound: {fileID: 0}
 --- !u!1 &598912799
 GameObject:
   m_ObjectHideFlags: 0
@@ -2239,5 +2286,6 @@ SceneRoots:
   - {fileID: 598912802}
   - {fileID: 330402358}
   - {fileID: 594666850}
+  - {fileID: 525930684}
   - {fileID: 1734080528}
   - {fileID: 705459019}

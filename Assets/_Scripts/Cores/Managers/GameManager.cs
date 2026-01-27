@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.U2D;
 using TMPro;
+using UnityEngine.XR;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,11 +10,14 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     // 딜러, 플레이어
-    public Player PlayerHand;
-    public Dealer DealerHand;
+    public Player Player;
+    public Dealer Dealer;
 
     // 덱
-    Deck _deck;
+    public Deck Deck { get; private set; }
+
+    // 현재 상태
+    private IGameState _currentState;
 
     [Header("Audio")]
     public AudioClip BGM;
@@ -21,12 +25,6 @@ public class GameManager : MonoBehaviour
     [Header("Resources")]
     public GameObject CardPrefab;
     public SpriteAtlas CardAtlas;
-
-    [Header("UI References")]
-    public GameObject ActionPanel;
-    public GameObject CoinPanel;
-    public GameObject ResultPanel;
-    public TextMeshProUGUI ResultText;
 
     private void Awake()
     {
@@ -40,50 +38,79 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // 히트 버튼
-    public void OnHitButton()
+    private void Start()
     {
-        // 패에 카드 1장 추가
-        PlayerHand.AddCard(_deck.DrawCard());
+        // BGM 재생
+        if (SoundManager.instance != null && BGM != null) SoundManager.instance.PlayBGM(BGM);
 
-        // 점수 체크
-        int score = PlayerHand.CalculateScore();
-        Debug.Log($"Player Hit! Score: {score}");
+        // 덱 초기화
+        Deck = new Deck();
 
-        // 블랙잭/버스트 체크
-        if (score > 21) ProcessResult($"Bust!\nYou Lose..");
-        else if (score == 21) OnStandButton();
+        // 베팅 상태로 변경
+        ChangeState(new BettingState());
     }
 
-    // 스탠드 버튼
-    public void OnStandButton()
+    // 상태 변경
+    public void ChangeState(IGameState newState)
     {
-        Debug.Log("Player Stand!");
-        ActionPanel.SetActive(false);
-
-        // 딜러 자동 프로세스 시작
-        StartCoroutine(DealerProcess());
+        _currentState = newState;
+        _currentState.Init(this);
     }
 
-    // 리트라이 버튼
-    public void OnRetryButton()
+    // 버튼이 호출할 함수
+    public void OnChipButton(int amount) => _currentState.OnBet(this, amount);
+    public void OnDealButton() => _currentState.OnDeal(this);
+    public void OnHitButton() => _currentState.OnHit(this);
+    public void OnStandButton() => _currentState.OnStand(this);
+    public void OnRetryButton() 
     {
-        Initialize();
+        // 판 초기화
+        Player.ClearHand();
+        Dealer.ClearHand();
+
+        ChangeState(new BettingState()); 
+    }
+
+    // 상태 클래스를 위한 헬퍼 함수
+    public void UpdateMoneyUI()
+    {
+        UIManager.instance.UpdateMoneyUI(Player.OwnedMoney, Player.BetAmount);
+    }
+
+    // 초기화
+    public void Initialize()
+    {
+
+        // 덱 초기화
+        Deck.Initialize();
+        Deck.Shuffle();
+
+        // 초기 카드 분배
+        Card dealerCard1 = Deck.DrawCard();
+        Card dealerCard2 = Deck.DrawCard();
+
+        dealerCard1.IsFaceUp = false;    // 한 장은 뒤집어줘야 함
+
+        Dealer.AddCard(dealerCard1);
+        Dealer.AddCard(dealerCard2);
+
+        Player.AddCard(Deck.DrawCard());   // 뒤집을 필요 없으니 바로 삽입
+        Player.AddCard(Deck.DrawCard());
     }
 
     // 딜러 자동 프로세스
-    IEnumerator DealerProcess()
+    public IEnumerator DealerProcess()
     {
         // 딜러의 첫 번째 카드 공개
-        DealerHand.RevealFirstCard();
+        Dealer.RevealFirstCard();
 
         // 1초 대기
         yield return new WaitForSeconds(1.0f);
 
         // 16점 이하일 시 딜러 드로우
-        while (DealerHand.CalculateScore() <= 16)
+        while (Dealer.CalculateScore() <= 16)
         {
-            DealerHand.AddCard(_deck.DrawCard());
+            Dealer.AddCard(Deck.DrawCard());
 
             // 1초 대기
             yield return new WaitForSeconds(1.0f);
@@ -95,60 +122,12 @@ public class GameManager : MonoBehaviour
     // 점수 계산
     void CalculateResult()
     {
-        int pScore = PlayerHand.CalculateScore();
-        int dScore = DealerHand.CalculateScore();
+        int pScore = Player.CalculateScore();
+        int dScore = Dealer.CalculateScore();
 
-        if (dScore > 21) ProcessResult("Dealer Bust! Player Win!");
-        else if (pScore > dScore) ProcessResult("Player Win!");
-        else if (pScore < dScore) ProcessResult("Dealer Win...");
-        else ProcessResult("Draw");
-    }
-
-    // 리절트 표시
-    void ProcessResult(string message)
-    {
-        // 리절트 패널 활성화
-        ResultPanel.SetActive(true);
-        
-        // 메시지 변경
-        ResultText.text = message;
-
-        // 액션 패널 끄기
-        ActionPanel.SetActive(false);
-    }
-
-    // 초기화
-    private void Initialize()
-    {
-        // 판 초기화
-        PlayerHand.ClearHand();
-        DealerHand.ClearHand();
-
-        // UI 초기화(버튼, 결과창)
-        if (ActionPanel != null) ActionPanel.SetActive(true);
-        if (ResultPanel != null) ResultPanel.SetActive(false);
-
-        // 덱 초기화
-        _deck = new Deck();
-        _deck.Initialize();
-        _deck.Shuffle();
-
-        // 초기 카드 분배
-        Card dealerCard1 = _deck.DrawCard();
-        Card dealerCard2 = _deck.DrawCard();
-
-        dealerCard1.IsFaceUp = false;    // 한 장은 뒤집어줘야 함
-
-        DealerHand.AddCard(dealerCard1);
-        DealerHand.AddCard(dealerCard2);
-
-        PlayerHand.AddCard(_deck.DrawCard());   // 뒤집을 필요 없으니 바로 삽입
-        PlayerHand.AddCard(_deck.DrawCard());
-    }
-
-    private void Start()
-    {
-        if (SoundManager.instance != null && BGM != null) SoundManager.instance.PlayBGM(BGM);
-        Initialize();
+        if (dScore > 21) ChangeState(new ResultState("Dealer Bust! You Win!", 0));
+        else if (pScore > dScore) ChangeState(new ResultState("You Win!", 0));
+        else if (pScore < dScore) ChangeState(new ResultState("Dealer Win...", 2));
+        else ChangeState(new ResultState("Draw", 1));
     }
 }
