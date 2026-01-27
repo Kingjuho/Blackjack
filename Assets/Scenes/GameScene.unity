@@ -348,6 +348,9 @@ MonoBehaviour:
   DealerHand: {fileID: 1734080527}
   CardPrefab: {fileID: 6718854384512008047, guid: 199e79189fddf964487799d2bdc89f98, type: 3}
   CardAtlas: {fileID: 100100200, guid: 48634ccc08a621a49965fd86d13f4ddf, type: 3}
+  ActionPanel: {fileID: 3984584}
+  CoinPanel: {fileID: 1950650103}
+  ResultPanel: {fileID: 0}
 --- !u!1 &344357656
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,7 +582,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &386714209
@@ -843,7 +846,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 681388555}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 330402359}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnHitButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &681388555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1009,7 +1024,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 794581740}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 330402359}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnStandButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &794581740
 MonoBehaviour:
   m_ObjectHideFlags: 0
