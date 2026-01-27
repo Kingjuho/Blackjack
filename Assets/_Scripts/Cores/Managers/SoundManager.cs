@@ -9,6 +9,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioSource _bgmSource; // 배경음악
     [SerializeField] AudioSource _sfxSource; // 효과음
 
+    [Header("SFX")]
+    public AudioClip ChipSound; // 칩 베팅
+
     private void Awake()
     {
         if (instance != null && instance != this)
