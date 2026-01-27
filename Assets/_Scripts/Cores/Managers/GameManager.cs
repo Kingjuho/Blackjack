@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     // 덱
     Deck _deck;
 
+    [Header("Audio")]
+    public AudioClip BGM;
+
     [Header("Resources")]
     public GameObject CardPrefab;
     public SpriteAtlas CardAtlas;
@@ -145,6 +148,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if (SoundManager.instance != null && BGM != null) SoundManager.instance.PlayBGM(BGM);
         Initialize();
     }
 }
