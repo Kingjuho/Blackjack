@@ -80,7 +80,6 @@ public class GameManager : MonoBehaviour
     // 초기화
     public void Initialize()
     {
-
         // 덱 초기화
         Deck.Initialize();
         Deck.Shuffle();
@@ -101,6 +100,8 @@ public class GameManager : MonoBehaviour
     // 딜러 자동 프로세스
     public IEnumerator DealerProcess()
     {
+        // TODO: 이 함수 시작부터 CalculateResult() 함수의 끝부분까지 Hit, Stand 버튼을 누를 수 없어야 함
+
         // 딜러의 첫 번째 카드 공개
         Dealer.RevealFirstCard();
 
