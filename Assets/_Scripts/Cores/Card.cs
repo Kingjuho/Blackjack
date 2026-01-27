@@ -26,7 +26,7 @@ public class Card
     }
 
     // 카드 뒤집혀있음 여부
-    public bool IsFaceUp { get; set; }
+    public bool IsFaceUp { get; set; } = true;
 
     public Card(Suit suit, Rank rank)
     {

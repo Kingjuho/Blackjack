@@ -6,12 +6,21 @@ public class GameManager : MonoBehaviour
     // 싱글톤
     public static GameManager instance;
 
+    // 딜러, 플레이어
     public Hand PlayerHand;
     public Hand DealerHand;
+
+    // 덱
+    Deck _deck;
 
     [Header("Resources")]
     public GameObject CardPrefab;
     public SpriteAtlas CardAtlas;
+
+    [Header("UI References")]
+    public GameObject ActionPanel;
+    public GameObject CoinPanel;
+    public GameObject ResultPanel;
 
     private void Awake()
     {
@@ -25,37 +34,46 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
+    public void OnHitButton()
     {
-        Deck deck = new Deck();
-        deck.Initialize();
-        deck.Shuffle();
 
-        // 딜러
-        DealerHand.AddCard(deck.DrawCard());
+    }
+    
+    public void OnStandButton()
+    {
 
-        // 뒤집기 확인
-        Card dealerCard2 = deck.DrawCard();
-        dealerCard2.IsFaceUp = true;
+    }
+
+    private void Initialize()
+    {
+        // 판 초기화
+        PlayerHand.ClearHand();
+        DealerHand.ClearHand();
+
+        // UI 초기화(버튼, 결과창)
+        if (ActionPanel != null) ActionPanel.SetActive(true);
+        if (ResultPanel != null) ResultPanel.SetActive(false);
+
+        // 덱 초기화
+        _deck = new Deck();
+        _deck.Initialize();
+        _deck.Shuffle();
+
+        // 초기 카드 분배
+        Card dealerCard1 = _deck.DrawCard();
+        Card dealerCard2 = _deck.DrawCard();
+
+        dealerCard1.IsFaceUp = false;    // 한 장은 뒤집어줘야 함
+
+        DealerHand.AddCard(dealerCard1);
         DealerHand.AddCard(dealerCard2);
 
-        // 플레이어
-        Card pCard1 = deck.DrawCard();
-        pCard1.IsFaceUp = true;
-        PlayerHand.AddCard(pCard1);
+        PlayerHand.AddCard(_deck.DrawCard());   // 뒤집을 필요 없으니 바로 삽입
+        PlayerHand.AddCard(_deck.DrawCard());
+    }
 
-        Card pCard2 = deck.DrawCard();
-        pCard2.IsFaceUp = true;
-        PlayerHand.AddCard(pCard2);
-
-        DealerHand.AddCard(deck.DrawCard());
-        DealerHand.AddCard(deck.DrawCard());
-        DealerHand.AddCard(deck.DrawCard());
-        DealerHand.AddCard(deck.DrawCard());
-        DealerHand.AddCard(deck.DrawCard());
-        DealerHand.AddCard(deck.DrawCard());
-        DealerHand.AddCard(deck.DrawCard());
-        DealerHand.AddCard(deck.DrawCard());
-        DealerHand.AddCard(deck.DrawCard());
+    private void Start()
+    {
+        Initialize();
     }
 }
