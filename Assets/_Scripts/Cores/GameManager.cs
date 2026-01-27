@@ -47,8 +47,9 @@ public class GameManager : MonoBehaviour
         int score = PlayerHand.CalculateScore();
         Debug.Log($"Player Hit! Score: {score}");
 
-        // 버스트 체크
+        // 블랙잭/버스트 체크
         if (score > 21) ProcessResult($"Bust!\nYou Lose..");
+        else if (score == 21) OnStandButton();
     }
 
     // 스탠드 버튼
