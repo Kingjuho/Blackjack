@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     // 딜러, 플레이어
-    public Hand PlayerHand;
-    public Hand DealerHand;
+    public Player PlayerHand;
+    public Dealer DealerHand;
 
     // 덱
     Deck _deck;
@@ -65,7 +65,10 @@ public class GameManager : MonoBehaviour
 
     // 딜러 자동 프로세스
     IEnumerator DealerProcess()
-    { 
+    {
+        // 딜러의 첫 번째 카드 공개
+        DealerHand.RevealFirstCard();
+
         // 1초 대기
         yield return new WaitForSeconds(1.0f);
 

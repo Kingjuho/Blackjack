@@ -2,13 +2,5 @@
 
 public class Player : Hand
 {
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
+    // TODO: 베팅 기능 추가
 }

@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   PlayerHand: {fileID: 705459020}
-  DealerHand: {fileID: 1734080527}
+  DealerHand: {fileID: 1734080529}
   CardPrefab: {fileID: 6718854384512008047, guid: 199e79189fddf964487799d2bdc89f98, type: 3}
   CardAtlas: {fileID: 100100200, guid: 48634ccc08a621a49965fd86d13f4ddf, type: 3}
   ActionPanel: {fileID: 3984584}
@@ -938,9 +938,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 705459018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cc9f47238cbc60458b636a66508bfd1, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e66b591029661140adc658cd0c6acc6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Hand
+  m_EditorClassIdentifier: Assembly-CSharp::Player
   _cardSpawnPoint: {fileID: 300610021}
 --- !u!1 &794581737
 GameObject:
@@ -1312,7 +1312,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1734080528}
-  - component: {fileID: 1734080527}
+  - component: {fileID: 1734080529}
   m_Layer: 0
   m_Name: Dealer
   m_TagString: Untagged
@@ -1320,19 +1320,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1734080527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1734080526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cc9f47238cbc60458b636a66508bfd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Hand
-  _cardSpawnPoint: {fileID: 1848705968}
 --- !u!4 &1734080528
 Transform:
   m_ObjectHideFlags: 0
@@ -1348,6 +1335,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1734080529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734080526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f95154ca7c027d94da807a80c31436ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Dealer
+  _cardSpawnPoint: {fileID: 1848705968}
 --- !u!1 &1848705967
 GameObject:
   m_ObjectHideFlags: 0

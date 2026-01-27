@@ -5,11 +5,11 @@ using UnityEngine;
 public class Hand : MonoBehaviour
 {
     // 패
-    private List<Card> _myCards = new List<Card>();
+    protected List<Card> _myCards { get; } = new List<Card>();
 
     // 카드 생성 위치
     [Header("UI Setting")]
-    [SerializeField] Transform _cardSpawnPoint;
+    [SerializeField] protected Transform _cardSpawnPoint;
 
     // 카드 생성 위치 설정
     public void Setup(Transform spawnPoint)
