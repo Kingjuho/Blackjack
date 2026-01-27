@@ -976,7 +976,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   _bgmSource: {fileID: 594666852}
   _sfxSource: {fileID: 594666851}
-  ChipSound: {fileID: 0}
+  ChipSound: {fileID: 8300000, guid: 519b666abcdf42f4b9a97a899f6223bd, type: 3}
 --- !u!1 &598912799
 GameObject:
   m_ObjectHideFlags: 0
