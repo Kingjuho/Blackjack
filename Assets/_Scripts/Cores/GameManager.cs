@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.U2D;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
     public GameObject ActionPanel;
     public GameObject CoinPanel;
     public GameObject ResultPanel;
+    public TextMeshProUGUI ResultText;
 
     private void Awake()
     {
@@ -45,12 +47,8 @@ public class GameManager : MonoBehaviour
         int score = PlayerHand.CalculateScore();
         Debug.Log($"Player Hit! Score: {score}");
 
-        if (score > 21)
-        {
-            Debug.Log($"Player Bust! 패배");
-            ActionPanel.SetActive(false);
-            // TODO: 리절트 창
-        }
+        // 버스트 체크
+        if (score > 21) ProcessResult($"Bust!\nYou Lose..");
     }
 
     // 스탠드 버튼
@@ -61,6 +59,12 @@ public class GameManager : MonoBehaviour
 
         // 딜러 자동 프로세스 시작
         StartCoroutine(DealerProcess());
+    }
+
+    // 리트라이 버튼
+    public void OnRetryButton()
+    {
+        Initialize();
     }
 
     // 딜러 자동 프로세스
@@ -84,18 +88,29 @@ public class GameManager : MonoBehaviour
         CalculateResult();
     }
 
-    // 리절트 표시
+    // 점수 계산
     void CalculateResult()
     {
         int pScore = PlayerHand.CalculateScore();
         int dScore = DealerHand.CalculateScore();
 
-        Debug.Log($"[Finish] Player: {pScore} vs Dealer: {dScore}");
+        if (dScore > 21) ProcessResult("Dealer Bust! Player Win!");
+        else if (pScore > dScore) ProcessResult("Player Win!");
+        else if (pScore < dScore) ProcessResult("Dealer Win...");
+        else ProcessResult("Draw");
+    }
 
-        if (dScore > 21) Debug.Log("Dealer Bust! Player Win!");
-        else if (pScore > dScore) Debug.Log("Player Win!");
-        else if (pScore < dScore) Debug.Log("Dealer Win...");
-        else Debug.Log("Draw.");
+    // 리절트 표시
+    void ProcessResult(string message)
+    {
+        // 리절트 패널 활성화
+        ResultPanel.SetActive(true);
+        
+        // 메시지 변경
+        ResultText.text = message;
+
+        // 액션 패널 끄기
+        ActionPanel.SetActive(false);
     }
 
     // 초기화
