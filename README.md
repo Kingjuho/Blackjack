@@ -10,3 +10,4 @@
 * [art_bickles - Pixel Art Card Deck – 52 Cards + Joker + 3 Backs](https://art-bickles.itch.io/playing-cards)
 * [reflector88 - Casino (RMMZ Plugin)](https://reflector88.itch.io/casino)
 * [Freepik - Flat design poker table background](https://kr.freepik.com/free-vector/flat-design-poker-table-background_94956216.htm#fromView=keyword&page=1&position=4&uuid=58d19bf7-aefa-4d0a-80ac-01c98beab463&query=Poker+table)
+* [Freepik - Flat design bankruptcy concept](https://kr.freepik.com/free-vector/flat-design-bankruptcy-concept_7473192.htm#from_element=cross_selling__vector")
