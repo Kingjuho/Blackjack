@@ -25,6 +25,9 @@
 
         // UI 갱신
         gm.UpdateMoneyUI();
+
+        // 게임 오버 체크
+        if (gm.Player.OwnedMoney <= 0) gm.ChangeState(new GameOverState());
     }
 
     public void OnBet(GameManager gm, int amount) { }
