@@ -53,7 +53,10 @@ public class UIManager : MonoBehaviour
 // 현재 게임 상태
 public enum GameState
 {
+    Main,
     Betting,
     Playing,
-    Result
+    DealerTurn,
+    Result,
+    GameOver
 }

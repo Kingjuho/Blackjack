@@ -30,6 +30,9 @@
 
     public void OnStand(GameManager gm)
     {
+        // 모든 UI 비활성화
+        UIManager.instance.SetStateUI(GameState.DealerTurn);
+        
         gm.StartCoroutine(gm.DealerProcess());
     }
 }
