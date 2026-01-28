@@ -134,7 +134,7 @@ public class GameManager : MonoBehaviour
         // 딜러 버스트(플레이어 승)
         if (dealerScore > 21)
         {
-            ChangeState(new ResultState("Dealer Bust! You Win!", 0, playerBlackJack));
+            ChangeState(new ResultState("You Win!", 0, playerBlackJack));
         }
         // 플레이어 점수가 높음(플레이어 승)
         else if (playerScore > dealerScore)
