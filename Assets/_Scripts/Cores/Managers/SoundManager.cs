@@ -9,6 +9,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioSource _bgmSource; // 배경음악
     [SerializeField] AudioSource _sfxSource; // 효과음
 
+    [Header("BGM")]
+    [SerializeField] AudioClip BGM;
+
     [Header("SFX")]
     public AudioClip ChipSound;     // 칩 베팅
     public AudioClip DealSound;     // 카드 분배
@@ -26,6 +29,12 @@ public class SoundManager : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        // BGM 재생
+        if (BGM != null) SoundManager.instance.PlayBGM(BGM);
     }
 
     // 배경음악 재생

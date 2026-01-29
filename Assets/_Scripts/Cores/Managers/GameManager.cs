@@ -12,14 +12,11 @@ public class GameManager : MonoBehaviour
     public Dealer Dealer;
 
     // 덱
-    public Deck Deck { get; private set; }
+    public Deck Deck { get; private set; } = new Deck();
     public Transform DeckPosition;
 
     // 현재 상태
     private IGameState _currentState;
-
-    [Header("Audio")]
-    public AudioClip BGM;
 
     [Header("Resources")]
     public GameObject CardPrefab;
@@ -39,12 +36,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // BGM 재생
-        if (SoundManager.instance != null && BGM != null) SoundManager.instance.PlayBGM(BGM);
-
-        // 덱 초기화
-        Deck = new Deck();
-
         // 베팅 상태로 변경
         ChangeState(new BettingState());
     }
