@@ -56,7 +56,7 @@ public enum GameState
     Main,
     Betting,
     Playing,
-    DealerTurn,
+    DealerTurn, // 모든 UI 비활성화에 사용
     Result,
     GameOver
 }
