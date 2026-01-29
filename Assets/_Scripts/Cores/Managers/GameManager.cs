@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.U2D;
-using TMPro;
-using UnityEngine.XR;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     // 덱
     public Deck Deck { get; private set; }
+    public Transform DeckPosition;
 
     // 현재 상태
     private IGameState _currentState;
@@ -84,17 +83,31 @@ public class GameManager : MonoBehaviour
         Deck.Initialize();
         Deck.Shuffle();
 
+        // 카드 분배
+        StartCoroutine(InitializeCoroutine());
+    }
+
+    // 카드 분배 코루틴
+    IEnumerator InitializeCoroutine()
+    {
         // 초기 카드 분배
         Card dealerCard1 = Deck.DrawCard();
         Card dealerCard2 = Deck.DrawCard();
 
         dealerCard1.IsFaceUp = false;    // 한 장은 뒤집어줘야 함
 
-        Dealer.AddCard(dealerCard1);
-        Dealer.AddCard(dealerCard2);
+        // 자연스러운 애니메이션 재생을 위한 0.5초 대기
+        Dealer.AddCard(dealerCard1, DeckPosition);
+        yield return new WaitForSeconds(0.5f);
 
-        Player.AddCard(Deck.DrawCard());   // 뒤집을 필요 없으니 바로 삽입
-        Player.AddCard(Deck.DrawCard());
+        Dealer.AddCard(dealerCard2, DeckPosition);
+        yield return new WaitForSeconds(0.5f);
+
+        Player.AddCard(Deck.DrawCard(), DeckPosition);   // 뒤집을 필요 없으니 바로 삽입
+        yield return new WaitForSeconds(0.5f);
+
+        Player.AddCard(Deck.DrawCard(), DeckPosition);
+        yield return new WaitForSeconds(0.5f);
     }
 
     // 딜러 자동 프로세스
@@ -109,7 +122,7 @@ public class GameManager : MonoBehaviour
         // 16점 이하일 시 딜러 드로우
         while (Dealer.CalculateScore() <= 16)
         {
-            Dealer.AddCard(Deck.DrawCard());
+            Dealer.AddCard(Deck.DrawCard(), DeckPosition);
 
             // 1초 대기
             yield return new WaitForSeconds(1.0f);

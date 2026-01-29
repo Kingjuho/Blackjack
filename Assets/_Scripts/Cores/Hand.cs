@@ -10,9 +10,10 @@ public class Hand : MonoBehaviour
     // 블랙잭 여부
     public bool IsBlackJack => CalculateScore() == 21 && _myCards.Count == 2;
 
-    // 카드 생성 위치
+    // 카드 UI 세팅
     [Header("UI Setting")]
     [SerializeField] protected Transform _cardSpawnPoint;
+    [SerializeField] float _spacing = 60f;
 
     // 카드 생성 위치 설정
     public void Setup(Transform spawnPoint)
@@ -47,21 +48,70 @@ public class Hand : MonoBehaviour
         return total;
     }
 
-    public void AddCard(Card card) 
-    { 
+    // 카드 추가
+    public void AddCard(Card card, Transform startPos)
+    {
         _myCards.Add(card);
 
         // 안전 장치
         if (_cardSpawnPoint == null) return;
 
         // 프리팹 생성
-        GameObject cardObj = Instantiate(GameManager.instance.CardPrefab, _cardSpawnPoint);
+        GameObject cardObj = Instantiate(GameManager.instance.CardPrefab);
 
         // 카드 데이터 주입
         CardView view = cardObj.GetComponent<CardView>();
         view.SetCard(card, GameManager.instance.CardAtlas);
+
+        // 목표 위치 계산
+        int index = _myCards.Count - 1;
+        float targetX = index * _spacing;
+        Vector3 targetLocalPos = new Vector3(targetX, 0, 0);
+
+        // 카드 정렬
+        AlignCard(cardObj.transform, startPos);
     }
 
+    // 카드 정렬
+    void AlignCard(Transform newCardTr, Transform startPos)
+    {
+        int count = _myCards.Count;
+
+        // 전체 카드의 너비 계산
+        float totalWidth = (count - 1) * _spacing;
+
+        // 시작 지점
+        float startX = -totalWidth / 2f;
+
+        for (int i = 0; i < count; i++)
+        {
+            // 해당 카드의 목표 지점
+            float targetX = startX + (i * _spacing);
+            Vector3 targetLocalPos = new Vector3(targetX, 0, 0);
+
+            // 리스트에서 카드 가져오기
+            Transform cardTr;
+            if (i == count - 1)
+            {
+                cardTr = newCardTr;
+
+                // 새 카드는 애니메이션 호출
+                AnimationManager.instance.DealCard(
+                    cardTr,
+                    startPos.position,
+                    targetLocalPos,
+                    _cardSpawnPoint
+                );
+            }
+            else
+            {
+                // 기존 카드는 옆으로 살짝 이동
+                AnimationManager.instance.AlignCard(_cardSpawnPoint.GetChild(i), targetLocalPos);
+            }
+        }
+    }
+
+    // 카드 청소
     public void ClearHand() 
     { 
         _myCards.Clear();

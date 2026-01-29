@@ -18,7 +18,7 @@
     public void OnHit(GameManager gm)
     {
         // 패에 카드 1장 추가
-        gm.Player.AddCard(gm.Deck.DrawCard());
+        gm.Player.AddCard(gm.Deck.DrawCard(), gm.DeckPosition);
 
         // 점수 체크
         int score = gm.Player.CalculateScore();
