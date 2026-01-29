@@ -99,6 +99,9 @@ public class GameManager : MonoBehaviour
 
         Player.AddCard(Deck.DrawCard(), DeckPosition);
         yield return new WaitForSeconds(0.5f);
+
+        // 내추럴 블랙잭 체크
+        if (Player.CalculateScore() == 21) OnStandButton();
     }
 
     // 딜러 자동 프로세스

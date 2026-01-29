@@ -7,9 +7,6 @@
 
         // 카드 분배
         gm.Initialize();
-
-        // 내추럴 블랙잭 체크
-        if (gm.Player.CalculateScore() == 21) OnStand(gm);
     }
 
     public void OnBet(GameManager gm, int amount) { }
