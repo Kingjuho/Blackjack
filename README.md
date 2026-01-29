@@ -18,3 +18,19 @@
 ### Standard Unity Asset Store EULA
 * [Demigiant - DOTween (HOTween v2)](https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676)
 * [That Witch Design - Simple Button Set 01](https://assetstore.unity.com/packages/2d/gui/icons/simple-button-set-01-153979)
+## 개발 주요 포인트
+### AI 사용
+* Gemini 3.0 Pro를 사용하여 기능 구현, 애니메이션 구현 시간 단축
+* Nanobanana Pro를 사용하여 로고 이미지 생성
+* 리팩토링, 버그 수정은 직접 시행
+### SOLID 원칙 준수
+* 게임 상태 구분에 State 패턴 사용, ISP 준수
+* 최대한 SRP를 준수하도록 코드 작성(예시: Hand.cs에서 애니메이션 처리 X, AnimationManager.cs로 분리)
+* Hand 클래스의 자식 클래스인 Dealer, Player 클래스를 LSP 준수하도록 작성
+### 라이센스 및 출처 표기
+* 크레딧 화면이 없으니 Readme.md에 제작자 요청을 준수하여 작성 
+## 스크린샷
+![Title Screen](./Images/Title.png)
+![Gameplay](./Images/Ingame.png)
+![You Win](./Images/Win.png)
+![Bankruptcy](./Images/Bankruptcy.png)
