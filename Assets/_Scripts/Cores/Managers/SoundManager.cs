@@ -10,7 +10,11 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioSource _sfxSource; // 효과음
 
     [Header("SFX")]
-    public AudioClip ChipSound; // 칩 베팅
+    public AudioClip ChipSound;     // 칩 베팅
+    public AudioClip DealSound;     // 카드 분배
+    public AudioClip WinSound;      // 승리
+    public AudioClip LoseSound;     // 패배
+    public AudioClip GameOverSound; // 게임 오버
 
     private void Awake()
     {

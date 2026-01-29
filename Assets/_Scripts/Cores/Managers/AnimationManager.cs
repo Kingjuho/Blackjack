@@ -47,10 +47,10 @@ public class AnimationManager : MonoBehaviour
         seq.Join(card.DOLocalMove(endLocalPos, _moveDuration).SetEase(Ease.OutBack));
         seq.Join(card.DOLocalRotate(Vector3.zero, _moveDuration).SetEase(Ease.OutCubic));
 
-        // 소리 재생
+        // 효과음 재생
         seq.OnStart(() =>
         {
-            // if (SoundManager.instance != null) SoundManager.instance.PlaySFX();
+            if (SoundManager.instance != null) SoundManager.instance.PlaySFX(SoundManager.instance.DealSound);
         });
     }
 

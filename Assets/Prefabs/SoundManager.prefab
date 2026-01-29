@@ -49,6 +49,8 @@ MonoBehaviour:
   _bgmSource: {fileID: 6930962352128576099}
   _sfxSource: {fileID: 6483660194595340154}
   ChipSound: {fileID: 8300000, guid: 519b666abcdf42f4b9a97a899f6223bd, type: 3}
+  DealSound: {fileID: 8300000, guid: b5ec35d22244cb945b4f4e1240596200, type: 3}
+  WinSound: {fileID: 8300000, guid: 54ed442d5b7b7da47b41ea41ffbc080e, type: 3}
 --- !u!82 &6930962352128576099
 AudioSource:
   m_ObjectHideFlags: 0

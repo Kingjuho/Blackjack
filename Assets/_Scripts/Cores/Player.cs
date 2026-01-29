@@ -32,6 +32,9 @@ public class Player : Hand
         int profit = isBlackJack ? (int)(BetAmount * 1.5) : BetAmount;
         OwnedMoney += (BetAmount + profit);
         BetAmount = 0;
+
+        // 효과음 재생
+        if (SoundManager.instance != null) SoundManager.instance.PlaySFX(SoundManager.instance.WinSound);
     }
 
     // 패배 정산
