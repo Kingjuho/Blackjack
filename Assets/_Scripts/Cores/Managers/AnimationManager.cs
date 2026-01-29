@@ -39,6 +39,9 @@ public class AnimationManager : MonoBehaviour
         // 시작 위치 고정 및 랜덤 회전
         card.position = startWorldPos;
         card.localRotation = Quaternion.Euler(0, 0, Random.Range(-90f, 90f));
+        
+        // Scale 1로 고정
+        card.localScale = Vector3.one;
 
         // DoTween 애니메이션 시퀀스 생성
         Sequence seq = DOTween.Sequence();
