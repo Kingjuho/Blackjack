@@ -25,7 +25,8 @@ public class BettingState : IGameState
         // 베팅하지 않으면 시작하지 않음
         if (gm.Player.BetAmount <= 0) return;
 
-        gm.ChangeState(new PlayingState());
+        // 초기화
+        gm.Initialize();
     }
 
     public void OnHit(GameManager gm) { }

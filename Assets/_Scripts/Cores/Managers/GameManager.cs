@@ -70,6 +70,9 @@ public class GameManager : MonoBehaviour
     // 초기화
     public void Initialize()
     {
+        // 버튼 UI 비활성화
+        UIManager.instance.SetStateUI(GameState.DealerTurn);
+
         // 덱 초기화
         Deck.Initialize();
         Deck.Shuffle();
@@ -102,6 +105,7 @@ public class GameManager : MonoBehaviour
 
         // 내추럴 블랙잭 체크
         if (Player.CalculateScore() == 21) OnStandButton();
+        else ChangeState(new PlayingState());
     }
 
     // 딜러 자동 프로세스

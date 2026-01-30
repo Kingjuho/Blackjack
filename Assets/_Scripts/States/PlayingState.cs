@@ -4,9 +4,6 @@
     {
         // UI 변경
         UIManager.instance.SetStateUI(GameState.Playing);
-
-        // 카드 분배
-        gm.Initialize();
     }
 
     public void OnBet(GameManager gm, int amount) { }
