@@ -50,8 +50,22 @@ public class GameManager : MonoBehaviour
     // 버튼이 호출할 함수
     public void OnChipButton(int amount) => _currentState.OnBet(this, amount);
     public void OnDealButton() => _currentState.OnDeal(this);
-    public void OnHitButton() => _currentState.OnHit(this);
-    public void OnStandButton() => _currentState.OnStand(this);
+    public void OnHitButton()
+    {
+        // 효과음 재생
+        if (SoundManager.instance != null)
+            SoundManager.instance.PlaySFX(SoundManager.instance.HitSound);
+
+        _currentState.OnHit(this);
+    }
+    public void OnStandButton()
+    {
+        // 효과음 재생
+        if (SoundManager.instance != null)
+            SoundManager.instance.PlaySFX(SoundManager.instance.StandSound);
+
+        _currentState.OnStand(this);
+    }
     public void OnRetryButton() 
     {
         // 판 초기화

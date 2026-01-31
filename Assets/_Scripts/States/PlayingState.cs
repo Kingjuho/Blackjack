@@ -11,10 +11,6 @@
     
     public void OnHit(GameManager gm)
     {
-        // 효과음 재생
-        if (SoundManager.instance != null)
-            SoundManager.instance.PlaySFX(SoundManager.instance.HitSound);
-
         // 패에 카드 1장 추가
         gm.Player.AddCard(gm.Deck.DrawCard(), gm.DeckPosition);
 
@@ -28,10 +24,6 @@
 
     public void OnStand(GameManager gm)
     {
-        // 효과음 재생
-        if (SoundManager.instance != null)
-            SoundManager.instance.PlaySFX(SoundManager.instance.StandSound);
-
         gm.StartCoroutine(gm.DealerProcess());
     }
 }
