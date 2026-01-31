@@ -18,7 +18,7 @@
         int score = gm.Player.CalculateScore();
 
         // 블랙잭/버스트 체크
-        if (score > 21) gm.ChangeState(new ResultState($"Bust!\nYou Lose..", 2));
+        if (score > 21) gm.StartCoroutine(gm.BustProcess());
         else if (score == 21) OnStand(gm);
     }
 

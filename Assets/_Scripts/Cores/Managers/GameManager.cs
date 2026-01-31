@@ -146,6 +146,18 @@ public class GameManager : MonoBehaviour
         CalculateResult();
     }
 
+    // 버스트 자동 프로세스
+    public IEnumerator BustProcess()
+    {
+        // 모든 UI 비활성화
+        UIManager.instance.SetStateUI(GameState.DealerTurn);
+        
+        // 1초 대기
+        yield return new WaitForSeconds(1.0f);
+
+        ChangeState(new ResultState($"Bust!\nYou Lose..", 2));
+    }
+
     // 점수 계산
     void CalculateResult()
     {
