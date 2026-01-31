@@ -52,8 +52,8 @@ MonoBehaviour:
   ChipSound: {fileID: 8300000, guid: 519b666abcdf42f4b9a97a899f6223bd, type: 3}
   DealSound: {fileID: 8300000, guid: b5ec35d22244cb945b4f4e1240596200, type: 3}
   FlipSound: {fileID: 8300000, guid: b5ec35d22244cb945b4f4e1240596200, type: 3}
-  HitSound: {fileID: 8300000, guid: 6add0dc8c5ff5144a9da54a3494a113d, type: 3}
-  StandSound: {fileID: 8300000, guid: 307f72d9046c0524fa69eff0f696cd64, type: 3}
+  HitSound: {fileID: 8300000, guid: 45b5278cc245f964a8e70bb9873ff7f2, type: 3}
+  StandSound: {fileID: 8300000, guid: 8ea5b3d212cdf114f8b53c434569eb41, type: 3}
   WinSound: {fileID: 8300000, guid: 54ed442d5b7b7da47b41ea41ffbc080e, type: 3}
   LoseSound: {fileID: 0}
   GameOverSound: {fileID: 0}
