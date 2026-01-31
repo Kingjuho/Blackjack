@@ -15,6 +15,9 @@ public class SoundManager : MonoBehaviour
     [Header("SFX")]
     public AudioClip ChipSound;     // 칩 베팅
     public AudioClip DealSound;     // 카드 분배
+    public AudioClip FlipSound;     // 카드 뒤집기
+    public AudioClip HitSound;      // 히트
+    public AudioClip StandSound;    // 스탠드
     public AudioClip WinSound;      // 승리
     public AudioClip LoseSound;     // 패배
     public AudioClip GameOverSound; // 게임 오버

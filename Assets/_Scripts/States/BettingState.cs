@@ -15,7 +15,11 @@ public class BettingState : IGameState
     {
         if (gm.Player.Bet(amount))
         {
-            SoundManager.instance.PlaySFX(SoundManager.instance.ChipSound);
+            // 효과음 재생
+            if (SoundManager.instance != null)
+                SoundManager.instance.PlaySFX(SoundManager.instance.ChipSound);
+            
+            // UI 갱신
             gm.UpdateMoneyUI();
         }
     }

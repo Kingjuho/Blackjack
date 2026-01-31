@@ -13,6 +13,10 @@ public class Dealer : Hand
         if (firstCardObj != null)
         {
             firstCardObj.GetComponent<CardView>().SetCard(_myCards[0], GameManager.instance.CardAtlas);
+            
+            // 효과음 재생
+            if (SoundManager.instance != null) 
+                SoundManager.instance.PlaySFX(SoundManager.instance.FlipSound);
         }
     }
 }
