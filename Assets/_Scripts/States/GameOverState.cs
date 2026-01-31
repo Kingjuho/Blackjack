@@ -23,6 +23,7 @@ public class GameOverState : IGameState
     {
         if (GameManager.instance != null) Object.Destroy(GameManager.instance.gameObject);
         if (UIManager.instance != null) Object.Destroy(UIManager.instance.gameObject);
+        if (AnimationManager.instance != null) Object.Destroy(AnimationManager.instance.gameObject);
 
         // SoundManager는 파괴하면 안 됨
     }

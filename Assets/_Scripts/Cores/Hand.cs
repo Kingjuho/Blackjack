@@ -63,11 +63,6 @@ public class Hand : MonoBehaviour
         CardView view = cardObj.GetComponent<CardView>();
         view.SetCard(card, GameManager.instance.CardAtlas);
 
-        // 목표 위치 계산
-        int index = _myCards.Count - 1;
-        float targetX = index * _spacing;
-        Vector3 targetLocalPos = new Vector3(targetX, 0, 0);
-
         // 카드 정렬
         AlignCard(cardObj.transform, startPos);
     }
