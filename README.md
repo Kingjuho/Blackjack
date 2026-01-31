@@ -18,6 +18,7 @@
 ### Standard Unity Asset Store EULA
 * [Demigiant - DOTween (HOTween v2)](https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676)
 * [That Witch Design - Simple Button Set 01](https://assetstore.unity.com/packages/2d/gui/icons/simple-button-set-01-153979)
+### TTS Maker Team(https://ttsmaker.com/)
 ## 개발 주요 포인트
 ### AI 사용
 * Gemini 3.0 Pro를 사용하여 기능 구현, 애니메이션 구현 시간 단축
