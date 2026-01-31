@@ -104,13 +104,16 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         // 내추럴 블랙잭 체크
-        if (Player.CalculateScore() == 21) OnStandButton();
+        if (Player.CalculateScore() == 21) StartCoroutine(DealerProcess());
         else ChangeState(new PlayingState());
     }
 
     // 딜러 자동 프로세스
     public IEnumerator DealerProcess()
     {
+        // 모든 UI 비활성화
+        UIManager.instance.SetStateUI(GameState.DealerTurn);
+
         // 딜러의 첫 번째 카드 공개
         Dealer.RevealFirstCard();
 
